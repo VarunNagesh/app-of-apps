@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: canary-demo-2
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: canary-demo
+    server: "https://kubernetes.default.svc"
+  project: default
+  source: 
+    path: ./
+    repoURL: "https://github.com/VarunNagesh/canary-2.git"
+    targetRevision: main
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
